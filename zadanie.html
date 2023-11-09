@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+<style>
+#kontener {
+  width: 50px;
+  height: 50px;
+  text-align: center;
+  background-color: #ccc;
+  cursor: pointer;
+  transition: font-size 0.3s, background-color 0.3s;
+}
+
+#wyroznione {
+  cursor: pointer;
+}
+
+#artykul {
+  width: 300px;
+}
+</style>
+</head>
+<body>
+<div id="kontener">Twoje imię i nazwisko</div>
+<p class="wyroznione">Nazwa miejscowości</p>
+<input id="artykul" type="text">
+<div id="liczba"></div>
+
+<script>
+
+const kontener = document.getElementById('kontener');
+
+kontener.addEventListener('click', () => {
+  const randomColor = getRandomColor();
+  kontener.style.backgroundColor = randomColor;
+});
+
+kontener.addEventListener('mouseover', () => {
+  kontener.style.fontSize = '2em';
+});
+
+kontener.addEventListener('mouseout', () => {
+  kontener.style.fontSize = '1em';
+});
+
+
+const wyroznione = document.querySelector('.wyroznione');
+
+wyroznione.addEventListener('dblclick', () => {
+  wyroznione.textContent = 'Nazwa powiatu';
+});
+
+wyroznione.addEventListener('mouseover', () => {
+  console.log(wyroznione.textContent);
+});
+
+
+const artykul = document.getElementById('artykul');
+const liczba = document.getElementById('liczba');
+
+artykul.addEventListener('keydown', () => {
+  artykul.style.width = artykul.value.length * 10 + 'px';
+});
+
+artykul.addEventListener('keypress', (event) => {
+  if (isNumericKey(event)) {
+    liczba.textContent += event.key;
+  }
+});
+
+function getRandomColor() {
+  const letters = '0123456789ABCDEF';
+  let color = '#';
+  for (let i = 0; i < 6; i++) {
+    color += letters[Math.floor(Math.random() * 16)];
+  }
+  return color;
+}
+
+function isNumericKey(event) {
+  return /^[0-9]$/.test(event.key);
+}
+</script>
+</body>
+</html>
